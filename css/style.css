@@ -5,80 +5,119 @@
 }
 
 .header {
-    padding-top: 30px;
-    margin-bottom: 40px;
+    padding-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.header__logo {
+    width: 40px;
+    height: 35px;
 }
 
 .header__heading {
+    display: inline;
     text-transform: uppercase;
     font-weight: 400;
-    text-align: center;
-    font-size: 30px;
-}
-
-/* возможно, придется это убрать и сделать просто пикчей в html,
-   т.к. палочка(::after) под названием не ровно стоит */
-.header__heading::before {
-    content: "";
-    width: 40px;
-    height: 22px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    display: inline-block;
-    background-image: url(../img/logo.png);
+    font-size: 48px;
 }
 
 .header__heading::after {
     content: "";
-    width: 100px;
+    width: 160px;
     display: block;
     margin: 0 auto;
-    margin-top: 12px;
+    margin-top: 20px;
     margin-bottom: 40px;
-    border: 1.5px solid black;
+    border: 2px solid black;
 }
 
 .header__description {
-    width: 500px;
     margin: 0 auto;
     text-align: center;
+    font-size: 21px;
 }
 
 .students {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: 360px;
+    grid-auto-rows: 360px;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .student {
-    width: 160px;
+    width: 220px;
     box-sizing: border-box;
-    margin: 0 20px;
     text-align: center;
     position: relative;
+    margin: 0 auto;
+    margin-top: 120px;
+    padding: 0 20px;
+    padding-top: 80px;
 }
 
-.student__shadow {
-    width: 100%;
-    height: 170px;
-    position: absolute;
-    top: 60px;
-}
-
-.student__shadow:hover {
+.student:hover {
     cursor: pointer;
-    box-shadow: 0 5px 5px 0px rgb(175, 175, 175);
+    box-shadow: 0 10px 10px 0px rgb(175, 175, 175);
+}
+
+.student:active {
+    cursor: pointer;
+    box-shadow: 0 0px 30px 0px rgb(100, 100, 100);
+    background-color: lightgray;
 }
 
 .student__img {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    top: -80px;
+    left: 50%;
+    margin-left: -80px;
+}
+
+.student__img_border-radius_50 {
     border-radius: 50%;
 }
 
+.student__img_border-radius_25 {
+    border-radius: 25%;
+}
+
 .student__name {
-    font-size: 16px;
+    font-size: 22px;
     margin-bottom: 7px;
 }
 
 .student__university {
     color: rgb(150, 150, 150);
-    font-size: 15px;
+    font-size: 19px;
+}
+
+
+/* Адаптивность */
+
+@media (max-width: 670px) {
+    .header__logo {
+        width: 27px;
+        height: 24px;
+    }
+    .header__heading {
+        font-size: 33px;
+    }
+    .header__description {
+        font-size: 17px;
+    }
+    .students {
+        display: grid;
+        grid-template-rows: 320px;
+        grid-auto-rows: 320px;
+        grid-template-columns: 1fr;
+    }
+    .student__name {
+        font-size: 19px;
+    }
+    .student__university {
+        font-size: 16px;
+    }
 }
