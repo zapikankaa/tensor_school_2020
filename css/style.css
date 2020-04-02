@@ -1,11 +1,13 @@
+@import url('reset.css');
+
 .page {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 20px auto;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .header {
-    padding-top: 50px;
+    padding-top: 60px;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -13,6 +15,7 @@
 .header__logo {
     width: 40px;
     height: 35px;
+    display: inline;
 }
 
 .header__heading {
@@ -36,6 +39,7 @@
     margin: 0 auto;
     text-align: center;
     font-size: 21px;
+    line-height: 25px;
 }
 
 .students {
@@ -53,7 +57,7 @@
     margin: 0 auto;
     margin-top: 120px;
     padding: 0 20px;
-    padding-top: 80px;
+    padding-top: 110px;
 }
 
 .student:hover {
@@ -86,7 +90,9 @@
 
 .student__name {
     font-size: 22px;
-    margin-bottom: 7px;
+    line-height: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .student__university {
@@ -120,4 +126,140 @@
     .student__university {
         font-size: 16px;
     }
+}
+
+/* Стили модалки */
+
+.close {
+    width: 10px;
+    height: 10px;
+    display: block;
+    position: absolute;
+    right: 0;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+
+.user {
+    z-index: 10;
+    position: absolute;
+    background-color: white;
+    margin: 0 auto;
+    padding: 8px;
+    width: 350px;
+    display: grid;
+    grid-gap: 3px;
+    grid-template-rows: 12px 40px 40px 34px;
+    grid-template-columns: 1fr 120px;
+    grid-template-areas: 
+    'lastSeen close'
+    'name avatar'
+    'info avatar'
+    'contact avatar';
+    border-radius: 3px;
+    box-shadow: 0 0px 10px 0px rgb(150, 150, 150);
+}
+
+.user__status {
+    grid-area: lastSeen;
+    font-size: 11px;
+    color: rgb(150, 150, 150);
+}
+
+.user__close {
+    grid-area: close;
+    position: relative;
+}
+
+.user__name {
+    grid-area: name;
+    font-size: 21px;
+    padding-top: 6px;
+    font-weight: normal;
+}
+
+.user__info {
+    grid-area: info;
+    font-size: 12px;
+}
+
+/* .table-data {
+
+} */
+
+.table-data__attr {
+    width: 45%;
+    color: rgb(150, 150, 150);
+    height: 20px;
+}
+
+.table-data__val {
+    width: 55%;
+    height: 20px
+}
+
+.user__contact {
+    grid-area: contact;
+    padding-top: 10px;
+}
+
+.user__contact > * {
+    float: left;
+}
+
+.user__message {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.user__friends {
+    color: blue;
+    font-size: 12px;
+    text-decoration: none;
+    line-height: 25px;
+}
+
+.friends {
+    width: 50px;
+    position: relative;
+    float: right;
+    margin-right: 5px;
+}
+
+.friends__item {
+    position: absolute;
+    right: 0;
+}
+
+.friends__item:nth-child(2) {
+    right: 15px;
+}
+
+.friends__item:nth-child(3) {
+    right: 30px;
+}
+
+.friends__item:nth-child(4) {
+    right: 45px;
+}
+
+.friends__icon {
+    width:20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.user__avatar {
+    grid-area: avatar;
+    width: 120px;
+    height: 120px;
+    border-radius: 3px;
+}
+
+.modal {
+    display: none;
+    /* box-shadow: 0 10px 10px 0px rgb(175, 175, 175); */
 }
