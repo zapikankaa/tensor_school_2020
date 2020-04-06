@@ -150,9 +150,7 @@
 .close {
     width: 10px;
     height: 10px;
-    display: block;
-    position: absolute;
-    right: 0;
+    display: inline;
 }
 
 .close:hover {
@@ -164,12 +162,13 @@
     position: absolute;
     background-color: white;
     margin: 0 auto;
-    padding: 8px;
+    padding: 6px;
+    padding-top: 3px;
     width: 320px;
     display: grid;
     grid-gap: 3px;
-    grid-template-rows: 12px 40px 40px 34px;
-    grid-template-columns: 1fr 120px;
+    grid-template-rows: 14px 34px 34px 28px;
+    grid-template-columns: 1fr 100px;
     grid-template-areas: 
     'lastSeen close'
     'name avatar'
@@ -182,12 +181,13 @@
 .user__status {
     grid-area: lastSeen;
     font-size: 11px;
+    line-height: 20px;
     color: rgb(150, 150, 150);
 }
 
 .user__close {
     grid-area: close;
-    position: relative;
+    text-align: right;
 }
 
 .user__name {
@@ -199,27 +199,25 @@
 
 .user__info {
     grid-area: info;
+    /* хотелось бы subgrid, но не все браузеры поддерживают */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 0;
     font-size: 12px;
 }
 
-/* .table-data {
-
-} */
-
-.table-data__attr {
-    width: 45%;
+.user__attribute {
     color: rgb(150, 150, 150);
-    height: 20px;
 }
 
-.table-data__val {
-    width: 55%;
-    height: 20px
+.user__data {
+    color: black;
 }
 
 .user__contact {
     grid-area: contact;
-    padding-top: 10px;
+    padding-top: 5px;
 }
 
 .user__contact > * {
@@ -251,6 +249,10 @@
     right: 0;
 }
 
+.friends__item:hover {
+    z-index: 10;
+}
+
 .friends__item:nth-child(2) {
     right: 15px;
 }
@@ -271,12 +273,13 @@
 
 .user__avatar {
     grid-area: avatar;
-    width: 120px;
-    height: 120px;
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
     border-radius: 3px;
 }
 
 .modal {
-    display: none;
+    /* display: none; */
     /* box-shadow: 0 10px 10px 0px rgb(175, 175, 175); */
 }
