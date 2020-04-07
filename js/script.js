@@ -24,7 +24,7 @@ let studentsData = [
         "course": 2,
         "photo": "./img/cersei.jpg",
         "telephone": "",
-        "online": "2020-04-05T08:03",
+        "online": "2020-04-07T08:03",
         "friendsNumber": 3489
     },
     {
@@ -32,7 +32,7 @@ let studentsData = [
         "firstName": "Вавилен",
         "lastName": "Татарский",
         "sex": "male",
-        "birthday": "1997-01-08",
+        // "birthday": "1997-01-08", закомменчено для примера
         "university": "СурГУ",
         "course": 3,
         "photo": "./img/cold_king.jpg",
@@ -135,6 +135,18 @@ class Student {
         return age;
     }
 
+    // возраст в формате 'N лет'
+    get yearsOld() {
+        let a = this.age % 10;
+        if (a == 1) {
+            if (a != 11) return `${ this.age } год`;
+        } else if (a > 1 && a < 5) {
+            return `${ this.age } года`;
+        } else {
+            return `${ this.age } лет`;
+        }
+    }
+
     // статус
     get status() {
         if (this.online == 'now') return 'Онлайн';
@@ -146,6 +158,8 @@ class Student {
             hours = online.getHours(),
             minutes = online.getMinutes();
         let date;
+
+        minutes = (minutes > 9) ? minutes : `0${ minutes }`;
         
         let now = new Date();
         if (now.getFullYear() != year) {
@@ -164,23 +178,25 @@ class Student {
 
         if (this.sex == 'male') return `Был ${ date }`;
         else return `Была ${ date }`;
-    }
 
-    getMonthName(monthNum) {
-        switch (monthNum) {
-            case 0: return 'января';
-            case 1: return 'февраля';
-            case 2: return 'марта';
-            case 3: return 'апреля';
-            case 4: return 'мая';
-            case 5: return 'июня';
-            case 6: return 'июля';
-            case 7: return 'августа';
-            case 8: return 'сентября';
-            case 9: return 'октября';
-            case 10: return 'ноября';
-            case 11: return 'декабря';
-        }
+    }
+}
+
+// получить название месяца из его порядкового номера
+function getMonthName(monthNum) {
+    switch (monthNum) {
+        case 0: return 'января';
+        case 1: return 'февраля';
+        case 2: return 'марта';
+        case 3: return 'апреля';
+        case 4: return 'мая';
+        case 5: return 'июня';
+        case 6: return 'июля';
+        case 7: return 'августа';
+        case 8: return 'сентября';
+        case 9: return 'октября';
+        case 10: return 'ноября';
+        case 11: return 'декабря';
     }
 }
 
@@ -197,6 +213,7 @@ class Student {
 function renderStudent(student) {
     let blockStudent = createEl('div');
     blockStudent.classList = 'student';
+    blockStudent.dataset.id = student.id;
 
     let student__img = createEl('img');
     student__img.classList = 'student__img student__img_border-radius_50';
@@ -217,6 +234,8 @@ function renderStudent(student) {
 
     blockStudent.append(student__img, student__name, student__description);
     document.querySelector('.students').append(blockStudent);
+
+    return blockStudent;
 }
 
 /* 
@@ -263,14 +282,105 @@ function renderStudent(student) {
 */
 
 function renderUser(user) {
-    let modal = createEl('div').classList = 'modal';
+    // let modal = createEl('div');
+    // modal.classList = 'modal';
 
-    let user = createEl('div').classList = 'user';
+    let blockUser = createEl('div');
+    blockUser.classList = 'user';
 
-    let user__status = createEl('p').classList = 'user__status';
-    user__status.textContent = ``;
+    let user__status = createEl('p');
+    user__status.classList = 'user__status';
+    user__status.title = user.status;
+    user__status.textContent = user.status;
 
-    modal.append(user);
+    let user__close = createEl('div');
+    user__close.classList = 'user__close';
+
+    let close = createEl('img');
+    close.classList = 'close';
+    close.alt = 'Закрыть';
+    close.src = './img/close.svg';
+
+    let user__name = createEl('h3');
+    user__name.classList = 'user__name';
+    user__name.title = (user.fullName) ? user.fullName : 'Неизвестно';
+    user__name.textContent = (user.fullName) ? user.fullName : 'Неизвестно';
+
+    let user__info = createEl('div');
+    user__info.classList = 'user__info';
+    
+    let user__attribute_birthday = createEl('p');
+    user__attribute_birthday.classList = 'user__attribute';
+    user__attribute_birthday.textContent = 'День рождения';
+
+    let birthday = new Date(Date.parse(user.birthday));
+        let user__data_birthday = createEl('p');
+    user__data_birthday.classList = 'user__data user__data_birthday';
+    if (user.birthday) {
+        user__data_birthday.title = `${ birthday.getDate() } ${ getMonthName( birthday.getMonth() ) }, ${ user.yearsOld }`;
+        user__data_birthday.textContent = `${ birthday.getDate() } ${ getMonthName( birthday.getMonth() ) }, ${ user.yearsOld }`;
+    } else {
+        user__data_birthday.title = 'Неизвестен';
+        user__data_birthday.textContent = 'Неизвестен';
+    }
+    
+
+    let user__attribute_telephone = createEl('p');
+    user__attribute_telephone.classList = 'user__attribute';
+    user__attribute_telephone.textContent = 'Телефон';
+
+    let user__data_telephone = createEl('p');
+    user__data_telephone.classList = 'user__data user__data_birthday';
+    if (user.telephone) {
+        user__data_telephone.title = `+${ user.telephone.slice(0, 1) } ${ user.telephone.slice(1, 4) } ${ user.telephone.slice(4, 7) } ${ user.telephone.slice(7, 9) } ${ user.telephone.slice(9, 11) }`;
+        user__data_telephone.textContent = `+${ user.telephone.slice(0, 1) } ${ user.telephone.slice(1, 4) } ${ user.telephone.slice(4, 7) } ${ user.telephone.slice(7, 9) } ${ user.telephone.slice(9, 11) }`;
+    } else {
+        user__data_telephone.title = 'Неизвестен';
+        user__data_telephone.textContent = 'Неизвестен';
+    }
+    
+
+    let user__contact = createEl('div');
+    user__contact.classList = 'user__contact';
+
+    let user__message = createEl('img');
+    user__message.classList = 'user__message';
+    user__message.alt = 'Написать сообщение';
+    user__message.src = './img/message.svg';
+
+    let user__friends = createEl('a');
+    user__friends.classList = 'user__friends';
+    user__friends.href = '#';
+    user__friends.textContent = `Друзей ${ user.friendsNumber }`;
+
+    let friends = createEl('div');
+    friends.classList = 'friends';
+    for (let i = 0; i < 4; i++) {
+        let friend__item = createEl('a');
+        friend__item.classList = 'friends__item';
+        friend__item.href = '#';
+
+        let friends__icon = createEl('img');
+        friends__icon.classList = 'friends__icon';
+        friends__icon.alt = `friend${ i }`;
+        friends__icon.title = `friend${ i }`;
+        friends__icon.src = `./img/ava${ i }.png`;
+
+        friend__item.append(friends__icon);
+        friends.append(friend__item);
+    }
+
+    let user__avatar = createEl('img');
+    user__avatar.classList = 'user__avatar';
+    user__avatar.alt = user.fullName;
+    user__avatar.src = user.photo;
+
+    user__contact.append(user__message, user__friends, friends);
+    user__info.append(user__attribute_birthday, user__data_birthday, user__attribute_telephone, user__data_telephone);
+    user__close.append(close);
+    blockUser.append(user__status, user__close, user__name, user__info, user__contact, user__avatar);
+
+    return blockUser;
 }
 
 function createEl(tag) {
@@ -281,99 +391,60 @@ function createEl(tag) {
 
 
 
-let students = [];
+let students = {};
 
-for (student of studentsData) {
+for (let student of studentsData) {
     let newStudent = new Student(student);
-    students.push(newStudent);
-    renderStudent(newStudent);
+    students[student.id] = newStudent;
+    newStudent = renderStudent(newStudent);
+    newStudent.addEventListener('click', showUser);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function setEventListeners() {
-    let students = document.getElementsByClassName('student');
-    for (student of students) {
-        student.addEventListener('click', showModal);
-    }
-    let modalClose = document.querySelector('.close');
-    modalClose.addEventListener('click', hideModal);
-}
-
-function showModal(e) {
+function showUser(e) {
     let student = e.target;
-    let name = student.getElementsByClassName('student__name')[0];
-    // проверяем: если  таргет на внутреннем элементе, 
-    // то надо найти сам блок student, на котором нажали,
-    // чтобы достать из него инфу
-    if (name == undefined) {
-        student = student.closest('.student');
-        name = student.getElementsByClassName('student__name')[0];
-    }
-    let photoSrc = student.getElementsByClassName('student__img')[0].src;
-    let birthdate = student.dataset.birthdate;
-    let telephone = student.dataset.telephone;
-    let friendsNumber = student.dataset.friendsNumber;
 
-    let coords = student.getBoundingClientRect();
-    let x = coords.x;
-    let y = coords.y;
+    student = student.closest('.student');
+    student.removeEventListener('click', showUser);
 
-    console.log(x, y);
+    let id = student.dataset.id;
+    let user = students[id];
 
-    let modal = document.getElementsByClassName('modal')[0];
+    let newUser = renderUser(user);
+    student.append(newUser);
+    newUser.style.left = `${ 5 }px`;
+    newUser.style.top = `${ 5 }px`;
 
-    let userName = modal.getElementsByClassName('user__name')[0];
-    let userAvatar = modal.getElementsByClassName('user__avatar')[0];
-    let userBD = modal.getElementsByClassName('table-data__val')[0];
-    let userTel = modal.getElementsByClassName('table-data__val')[1];
-    let userFN = modal.getElementsByClassName('user__friendsNum')[0];
+    let userClose = newUser.querySelector('.close');
 
-    userName.textContent = name.textContent;
-    userAvatar.src = photoSrc;
-    userBD.textContent = birthdate;
-    userTel.textContent = telephone;
-    userFN.textContent = friendsNumber;
+    userClose.addEventListener('click', hideUser);
 
-    // let user = document.getElementsByClassName('user')[0];
-    user.style.left = `${x}px`;
-    user.style.top = `${y - 76}px`;
+    // доработать
+    // setTimeout(() => {
+    //     document.body.addEventListener('click', checkUser);
+    // }, 100);
     
-    console.log(user)
-
-    modal.style.display = 'block';
+}
+// доработать
+function checkUser(e) {
+    console.log('wtf');
+    let users = document.querySelectorAll('.user');
+    for (let user of users) {
+        if (e.target != user) {
+            let student = user.closest('.student');
+            document.body.removeEventListener('click', checkUser);
+            user.removeEventListener('click', hideUser);
+            user.remove();
+            student.addEventListener('click', showUser);
+        }
+    }
 }
 
-function hideModal() {
-    let modal = document.getElementsByClassName('modal')[0];
-    modal.style.display = 'none';
-}
+function hideUser(e) {
+    let user = e.target.closest('.user');
+    let student = user.closest('.student');
 
-setEventListeners();
+    document.body.removeEventListener('click', checkUser);
+    user.removeEventListener('click', hideUser);
+    user.remove();
+    student.addEventListener('click', showUser);
+}
