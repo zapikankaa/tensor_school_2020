@@ -4,50 +4,10 @@
 		<meta charset="utf-8">
         <title>Tensor School</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/style.css">
-        <script src="js/script.js" defer></script>
+        <link rel="stylesheet" href="css/style.min.css">
+        <script src="js/script.min.js" defer></script>
 	</head>
 	<body>
-        <!-- Модалка -->
-        <!-- <div class="modal">
-            <div class="user">
-                <p class="user__status" title="Был сегодня в 10:00">Был сегодня в 10:00</p>
-                <div class="user__close">
-                    <img class="close" alt="Закрыть" src="img/close.svg" />
-                </div>
-                <h3 class="user__name" title="Каримов Эмиль">Каримов Эмиль</h3>
-                <div class="user__info">
-                    <p class="user__attribute">
-                        День рождения
-                    </p>
-                    <p class="user__data user__data_birthday">15 декабря, 21 год</p>
-                    <p class="user__attribute">
-                        Телефон
-                    </p>
-                    <p class="user__data user__data_telephone">+7 996 402 21 97</p>
-                </div>
-                <div class="user__contact">
-                    <img class="user__message" src="img/message.svg" alt="message" />
-                    <a class="user__friends" href="#">Друзей 254</a>
-                    <div class="friends">
-                        <a class="friends__item" href="#">
-                            <img class="friends__icon" alt="friend1" src="img/ava2.png">
-                        </a>
-                        <a class="friends__item" href="#">
-                            <img class="friends__icon" alt="friend1" src="img/ava3.png">
-                        </a>
-                        <a class="friends__item" href="#">
-                            <img class="friends__icon" alt="friend1" src="img/ava1.png">
-                        </a>
-                        <a class="friends__item" href="#">
-                            <img class="friends__icon" alt="friend1" src="img/ava2.png">
-                        </a>
-                    </div>
-                </div>
-                <img class="user__avatar" src="img/ava1.png" alt="Каримов Эмиль" />
-            </div>
-        </div> -->
-
         <!-- Контейнер для всей страницы -->
         <div class="page">
 
@@ -62,6 +22,7 @@
             <section class="students">
                 
                 <!-- Карточка студента -->
+
                 <!-- <div class="student" 
                 data-birthdate="1 мая, 20 лет" 
                 data-telephone="+7 (999) 655-45-56"
@@ -70,56 +31,6 @@
                     <img class="student__img student__img_border-radius_50" src="img/ava1.png" alt="Маша Иванова" />
                     <h3 class="student__name" title="Маша Иванова">Маша Иванова</h3>
                     <p class="student__description" title="УГАТУ 2 курс">УГАТУ 2 курс</p>
-                </div>
-
-                <div class="student"
-                data-birthdate="8 января, 21 год" 
-                data-telephone="+7 (996) 456-78-90"
-                data-friends-number="18"
-                >
-                    <img class="student__img student__img_border-radius_25" src="img/ava2.png" alt="Вавилен Татарский" />
-                    <h3 class="student__name" title="Вавилен Татарский">Вавилен Татарский</h3>
-                    <p class="student__description" title="СурГУ 3 курс">СурГУ 3 курс</p>
-                </div>
-
-                <div class="student"
-                data-birthdate="18 декабря, 29 лет" 
-                data-telephone="+7 (909) 123-33-98"
-                data-friends-number="7"
-                >
-                    <img class="student__img student__img_border-radius_50" src="img/ava3.png" alt="Даниэль Риверо Падилья" />
-                    <h3 class="student__name" title="Даниэль Риверо Падилья">Даниэль Риверо Падилья</h3>
-                    <p class="student__description" title="БГУ 4 курс">БГУ 4 курс</p>
-                </div>
-
-                <div class="student">
-                    <img class="student__img student__img_border-radius_25" src="img/ava1.png" alt="аргарита Анна-Лиза фон Гейзенберг" />
-                    <h3 class="student__name" title="Маргарита Анна-Лиза фон Гейзенберг">Маргарита Анна-Лиза фон Гейзенберг</h3>
-                    <p class="student__description" title="УГАТУ 2 курс">УГАТУ 2 курс</p>
-                </div>
-
-                <div class="student">
-                    <img class="student__img student__img_border-radius_50" src="img/ava2.png" alt="Миша Петров" />
-                    <h3 class="student__name" title="Миша Петров">Миша Петров</h3>
-                    <p class="student__description" title="УрФУ 3 курс">СурГУ 3 курс</p>
-                </div>
-
-                <div class="student">
-                    <img class="student__img student__img_border-radius_25" src="img/ava3.png" alt="Ян Коган" />
-                    <h3 class="student__name" title="Ян Коган">Ян Коган</h3>
-                    <p class="student__description" title="БГУ 4 курс">БГУ 4 курс</p>
-                </div>
-
-                <div class="student">
-                    <img class="student__img student__img_border-radius_50" src="img/ava1.png" alt="Симон Гроф" />
-                    <h3 class="student__name" title="Симон Гроф">Симон Гроф</h3>
-                    <p class="student__description" title="УГАТУ 2 курс">УГАТУ 2 курс</p>
-                </div>
-
-                <div class="student">
-                    <img class="student__img student__img_border-radius_25" src="img/ava2.png" alt="Марат Сидоров" />
-                    <h3 class="student__name" title="Марат Сидоров">Марат Сидоров</h3>
-                    <p class="student__description" title="СурГУ 3 курс">СурГУ 3 курс</p>
                 </div> -->
             </section>
         </div>

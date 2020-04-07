@@ -282,8 +282,6 @@ function renderStudent(student) {
 */
 
 function renderUser(user) {
-    // let modal = createEl('div');
-    // modal.classList = 'modal';
 
     let blockUser = createEl('div');
     blockUser.classList = 'user';
@@ -389,17 +387,6 @@ function createEl(tag) {
     return document.createElement(tag);
 }
 
-
-
-let students = {};
-
-for (let student of studentsData) {
-    let newStudent = new Student(student);
-    students[student.id] = newStudent;
-    newStudent = renderStudent(newStudent);
-    newStudent.addEventListener('click', showUser);
-}
-
 function showUser(e) {
     let student = e.target;
 
@@ -447,4 +434,13 @@ function hideUser(e) {
     user.removeEventListener('click', hideUser);
     user.remove();
     student.addEventListener('click', showUser);
+}
+
+let students = {};
+
+for (let student of studentsData) {
+    let newStudent = new Student(student);
+    students[student.id] = newStudent;
+    newStudent = renderStudent(newStudent);
+    newStudent.addEventListener('click', showUser);
 }
